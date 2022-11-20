@@ -18,4 +18,4 @@
 4. Figma
 5. PerfectPixel - проверка верстки сайта
 
-###Ссылка на проект:
+###Ссылка на проект: https://mariasizova.github.io/mesto/
