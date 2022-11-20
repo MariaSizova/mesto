@@ -35,7 +35,7 @@
           <li class="cards__item">
             <img src="./images/karachaev.jpg" alt="На изображении отражена крепость в Карачаевске" class="cards__image">
             <div class="cards__description">
-              <h2 class="cards__title">Карачаевск</h2>
+              <h2 class="cards__title">Карачаево</h2>
               <img src="./images/vector_love.svg" alt="Лайк" class="cards__vector-love">
             </div>
           </li>
@@ -70,7 +70,7 @@
           <li class="cards__item">
             <img src="./images/karachaev.jpg" alt="На изображении отражена крепость в Карачаевске" class="cards__image">
             <div class="cards__description">
-              <h2 class="cards__title">Карачаево-Ч...</h2>
+              <h2 class="cards__title">Карачаево-Черкесия</h2>
               <img src="./images/vector_love.svg" alt="Лайк" class="cards__vector-love">
             </div>
           </li>
@@ -81,18 +81,19 @@
       <p class="footer__copyright">&copy;2022 Mesto Russia</p>
     </section>
   </div>
-  <div class="popup" hidden>
+  <section class="popup">
     <div class="popup__container">
       <form class="popup__form">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__input" type="text" placeholder="Жак-Ив Кусто" name="Имя">
-        <input class="popup__input" type="text" placeholder="Исследователь океана" name="Прфессия">
+        <input class="popup__surname" type="text" name="Имя" value="Жак-Ив Кусто">
+        <input class="popup__profession" type="text" name="Профессия" value="Исследователь океана">
         <button type="submit" class="popup__save-btn">Cохранить</button>
-        <button type="button" class="popup__close-btn" onclick="closeForm()"><img src="./images/Close Icon.svg" alt=""></button>
+        <button type="button" class="popup__close-btn" onclick="closeForm()"><img src="./images/close_icon.svg"
+            alt="Крестик"></button>
       </form>
     </div>
-  </div>
-  <script src="./script.js"></script>
+  </section>
+  <script src="./scripts/script.js"></script>
 </body>
 
 </html>

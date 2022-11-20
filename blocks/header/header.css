@@ -1,5 +1,6 @@
 .header {
   padding: 0 19px;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   height: 74px;
 }

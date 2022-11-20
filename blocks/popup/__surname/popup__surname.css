@@ -1,0 +1,20 @@
+.popup__surname {
+  display: block;
+  width: 358px;
+  height: 36px;
+  margin-top: 38px;
+  padding: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+@media screen and (max-width: 710px) {
+  .popup__surname {
+    width: 238px;
+    margin-top: 66px;
+  }
+}

@@ -8,6 +8,7 @@
     padding: 0 0 0 27px;
     width: 103.74px;
     height: 24.4px;
+    -o-object-fit: cover;
     object-fit: cover;
   }
 }
