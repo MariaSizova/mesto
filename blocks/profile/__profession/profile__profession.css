@@ -6,12 +6,12 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  width: 294px;
 }
 
 @media screen and (max-width: 710px) {
   .profile__profession {
     text-align: center;
-    margin-top: 8px;
     font-size: 14px;
     line-height: 17px;
   }

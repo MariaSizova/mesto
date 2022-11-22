@@ -3,6 +3,7 @@
   height: 24px;
   border: 1px solid #FFFFFF;
   background: none;
+  background: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12,10 +13,10 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
   padding: 0;
-  position: absolute;
-  right: 0;
-  top: 16px;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
@@ -30,7 +31,6 @@
   .profile__edit-button{
     width: 18px;
     height: 18px;
-    right: 19px;
-    top: 8px;
+    padding: 5px;
   }
 }

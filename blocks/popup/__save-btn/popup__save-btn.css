@@ -12,6 +12,8 @@
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
+  border: 0;
+  padding: 0;
 }
 
 .popup__save-btn:hover {
@@ -24,5 +26,6 @@
     width: 238px;
     font-size: 14px;
     line-height: 17px;
+    margin-top: 42px;
   }
 }

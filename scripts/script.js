@@ -3,8 +3,17 @@
 const popupElement = document.querySelector('.popup');
 const popupCloseButtonElement = popupElement.querySelector('.popup__close-btn');
 const popupOpenButtonElement = document.querySelector('.profile__edit-button');
+const formElement = document.querySelector('.popup__form');
+const nameInput = formElement.querySelector('.popup__input_type_surname');
+const jobInput = formElement.querySelector('.popup__input_type_profession');
+const saveButton = formElement.querySelector('.popup__save-btn');
+const profileTitle = document.querySelector('.profile__title');
+const profileProfession = document.querySelector('.profile__profession');
+
 const openPopup = function () {
   popupElement.classList.add('popup_is-opened');
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileProfession.textContent;
 }
 
 const closePopup = function () {
@@ -12,26 +21,17 @@ const closePopup = function () {
 }
 
 popupOpenButtonElement.addEventListener('click', openPopup);
-popupCloseButtonElement.addEventListener('click', closePopup);
 
 //Редактирование имени и информации о себе
 
-let formElement = document.querySelector('.popup__form');
-let nameInput = formElement.querySelector('.popup__surname');
-let jobInput = formElement.querySelector('.popup__profession');
-let saveButton = formElement.querySelector('.popup__save-btn');
-let profileTitle = document.querySelector('.profile__title');
-let profileProfession = document.querySelector('.profile__profession');
-
 function formSubmitHandler(evt) {
   evt.preventDefault();
-  nameInput.textContent = nameInput.value;
   profileTitle.textContent = nameInput.value;
-  jobInput.textContent = jobInput.value;
   profileProfession.textContent = jobInput.value;
 }
 
-saveButton.addEventListener('click', formSubmitHandler);
+popupCloseButtonElement.addEventListener('click', closePopup);
+
 formElement.addEventListener('submit', formSubmitHandler);
 
 
