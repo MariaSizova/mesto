@@ -33,54 +33,7 @@
       </section>
       <section class="elements">
         <ul class="cards">
-          <li class="cards__item">
-            <img src="./images/karachaev.jpg" alt="На изображении отражена крепость в Карачаевске" class="cards__image">
-            <div class="cards__description">
-              <h2 class="cards__title">Карачаево</h2>
-              <button type="button" class="cards__like-btn"><img src="./images/vector_love.svg" alt="Лайк"
-                  class="cards__vector-love"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/elbrus.png" alt="На изображении отражены горы Эльбрус" class="cards__image">
-            <div class="cards__description">
-              <h2 class="cards__title">Гора Эльбрус</h2>
-              <button type="button" class="cards__like-btn"><img src="./images/vector_love.svg" alt="Лайк"
-                  class="cards__vector-love"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/dombai.png" alt="На изображении отражены горы Домбая" class="cards__image">
-            <div class="cards__description">
-              <h2 class="cards__title">Домбай</h2>
-              <button type="button" class="cards__like-btn"><img src="./images/vector_love.svg" alt="Лайк"
-                  class="cards__vector-love"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/elbrus.png" alt="На изображении отражены горы Эльбрус" class="cards__image">
-            <div class="cards__description">
-              <h2 class="cards__title">Гора Эльбрус</h2>
-              <button type="button" class="cards__like-btn"><img src="./images/vector_love.svg" alt="Лайк"
-                  class="cards__vector-love"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/dombai.png" alt="На изображении отражены горы Домбая" class="cards__image">
-            <div class="cards__description">
-              <h2 class="cards__title">Домбай</h2>
-              <button type="button" class="cards__like-btn"><img src="./images/vector_love.svg" alt="Лайк"
-                  class="cards__vector-love"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/karachaev.jpg" alt="На изображении отражена крепость в Карачаевске" class="cards__image">
-            <div class="cards__description">
-              <h2 class="cards__title">Карачаево-Черкесия</h2>
-              <button type="button" class="cards__like-btn"><img src="./images/vector_love.svg" alt="Лайк"
-                  class="cards__vector-love"></button>
-            </div>
-          </li>
+
         </ul>
       </section>
     </main>
@@ -101,7 +54,18 @@
           class="popup__img-close-btn"></button>
     </div>
   </div>
-  <script src="./scripts/script.js"></script>
+  <script src="./scripts/script.js" defer></script>
+  <!--Template для создания карточек-->
+  <template id="templateCards">
+    <li class="cards__item">
+      <img src="" alt="" class="cards__image">
+      <div class="cards__description">
+        <h2 class="cards__title"></h2>
+        <button type="button" class="cards__like-btn"><img src="./images/vector_love.svg" alt="Лайк"
+            class="cards__vector-love"></button>
+      </div>
+    </li>
+  </template>
 </body>
 
 </html>
