@@ -41,7 +41,7 @@
       <p class="footer__copyright">&copy;2022 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup">
+  <div class="popup popup_type_profile">
     <div class="popup__container">
       <form class="popup__form">
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -50,6 +50,27 @@
           value="Исследователь океана">
         <button type="submit" class="popup__save-btn">Cохранить</button>
       </form>
+      <button type="button" class="popup__close-btn"><img src="./images/close_icon.svg" alt="Крестик"
+          class="popup__img-close-btn"></button>
+    </div>
+  </div>
+  <div class="popup popup_type_add-place">
+    <div class="popup__container">
+      <form class="popup__form">
+        <h2 class="popup__title">Новое место</h2>
+        <input class="popup__input popup__input_type_place-name" type="text" name="Название" placeholder="Название">
+        <input class="popup__input popup__input_type_link" type="text" name="Ссылка" placeholder="Ссылка на картинку">
+        <button type="submit" class="popup__save-btn">Cоздать</button>
+      </form>
+      <button type="button" class="popup__close-btn"><img src="./images/close_icon.svg" alt="Крестик"
+          class="popup__img-close-btn"></button>
+    </div>
+  </div>
+  <div class="popup popup_type_place-image popup_is-opened">
+    <div class="popup__container popup__container_image">
+      <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt=""
+        class="popup__image">
+      <h2 class="popup__image-title">Карачаево-Черкессия</h2>
       <button type="button" class="popup__close-btn"><img src="./images/close_icon.svg" alt="Крестик"
           class="popup__img-close-btn"></button>
     </div>

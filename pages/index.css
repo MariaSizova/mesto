@@ -49,3 +49,25 @@
 @import url(../blocks/popup/__save-btn/popup__save-btn.css);
 @import url(../blocks/popup/__close-btn/popup__close-btn.css);
 @import url(../blocks/popup/__img-close-btn/popup__img-close-btn.css);
+
+.popup_type_place-image{
+  background: rgba(0, 0, 0, 0.9);
+}
+.popup__container_image {
+width: auto;
+flex-direction: column;
+}
+
+.popup__image {
+  max-height: 75vh;
+  max-width: 75vw;
+}
+
+.popup__image-title {
+  margin-top: 10px;
+  align-self: flex-start;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+}
