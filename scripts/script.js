@@ -16,6 +16,12 @@ const formElementAddPlace = popupElementAddPlace.querySelector('.popup__form');
 const pictureInput = document.querySelector('.popup__input_type_place-name');
 const linkInput = document.querySelector('.popup__input_type_link');
 
+//DOM узел попап 3
+const popupElementImage = document.querySelector('.popup_type_place-image');
+const popupImageElementImage = popupElementImage.querySelector('.popup__image');
+const popupCloseButtonElementImage = popupElementImage.querySelector('.popup__close-btn');
+const popupTitleElementImage = popupElementImage.querySelector('.popup__image-title');
+
 // Функция открытие попап 1
 const openPopupProfile = () => {
   popupElementProfile.classList.add('popup_is-opened'); // Добавлет класс для отображения попап
@@ -28,6 +34,11 @@ const openPopupAddPlace = () => {
   popupElementAddPlace.classList.add('popup_is-opened'); // Добавлет класс для отображения попап
 }
 
+// Функция открытия попап 3
+const openPopupImage = () => {
+  popupElementImage.classList.add('popup_is-opened'); // Добавлет класс для отображения попап
+}
+
 // Функция закрытия попап 1
 const closePopupProfile = () => {
   popupElementProfile.classList.remove('popup_is-opened'); // Удаляет класс для отображения попап
@@ -36,6 +47,11 @@ const closePopupProfile = () => {
 // Функция закрытия попап 2
 const closePopupAddPlace = () => {
   popupElementAddPlace.classList.remove('popup_is-opened'); // Удаляет класс для отображения попап
+}
+
+// Функция закрытия попап 3
+const closePopupImage = () => {
+  popupElementImage.classList.remove('popup_is-opened'); // Удаляет класс для отображения попап
 }
 
 // Кнопка открытия попап 1
@@ -50,6 +66,9 @@ popupCloseButtonElementProfile.addEventListener('click', closePopupProfile); // 
 // Кнопка закрытия попап 2
 popupCloseButtonElementAddPlace.addEventListener('click', closePopupAddPlace); // По клику на кнопку запускает функцию закрытия попап 2
 
+// Кнопка закрытия попап 3
+popupCloseButtonElementImage.addEventListener('click', closePopupImage); // По клику на кнопку запускает функцию закрытия попап 3
+
 //Редактирование имени и информации о себе попап 1
 function formSubmitHandler(evt) {
   evt.preventDefault(); // Отменить действие браузера по умолчанию после наступления события
@@ -60,11 +79,6 @@ function formSubmitHandler(evt) {
 
 // Кнопка отправки формы попап 1
 formElementProfile.addEventListener('submit', formSubmitHandler);
-
-
-
-
-
 
 
 // Массив карточек
@@ -96,7 +110,7 @@ const initialCards = [
   }
 ];
 
-// Дом узлы (+добавить значения для кнопок)
+// Дом узлы
 
 const cardContainer = document.querySelector(".cards");
 
@@ -122,12 +136,22 @@ const generateCard = (dataCard) => {
 
   const link = newCard.querySelector('.cards__image');
   link.setAttribute('src', dataCard.link); // Присваиваем значение link из массива к новой карточке
+  link.setAttribute('alt', dataCard.name); // Присваиваем значение в alt картинки
 
   const likeButton = newCard.querySelector('.cards__like-btn');
   likeButton.addEventListener('click', handleLikeButton)
 
   const DeleteButton = newCard.querySelector('.cards__remove-btn');
   DeleteButton.addEventListener('click', handleDeleteCard)
+
+  const popupOpenButtonImage = newCard.querySelector('.cards__image');
+  const handlePopupImage = () => {
+    popupImageElementImage.src = dataCard.link;
+    popupImageElementImage.alt = dataCard.name;
+    popupTitleElementImage.textContent = dataCard.name;
+    openPopupImage();
+  }
+  popupOpenButtonImage.addEventListener('click', handlePopupImage);
 
   return newCard; //возвращаем карточки
 }
@@ -138,6 +162,7 @@ const handleSubmitAddCard = (event) => {
   renderCard({ name: pictureInput.value, link: linkInput.value }); // вызывает функцию добавление карточки и передает значение из input
   pictureInput.value = ''; // делает значение формы name пустым
   linkInput.value = ''; // делает значение формы link пустым
+  closePopupAddPlace();
 };
 
 
@@ -156,3 +181,5 @@ initialCards.forEach((dataCard) => {
 
 // Добавление новой карточки попап 2
 formElementAddPlace.addEventListener('submit', handleSubmitAddCard);
+
+

@@ -31,7 +31,9 @@
 @import url(../blocks/cards/__description/cards__description.css);
 @import url(../blocks/cards/__title/cards__title.css);
 @import url(../blocks/cards/__like-btn/cards__like-btn.css);
-@import url(../blocks/cards/__vector-love/cards__vector-love.css);
+@import url(../blocks/cards/__remove-btn/cards__remove-btn.css);
+@import url(../blocks/cards/__vector-korzina/cards__vector-korzina.css);
+@import url(../blocks/cards/__like-btn/_active/cards__like-btn_active.css);
 
 /* Footer start */
 
@@ -49,59 +51,7 @@
 @import url(../blocks/popup/__save-btn/popup__save-btn.css);
 @import url(../blocks/popup/__close-btn/popup__close-btn.css);
 @import url(../blocks/popup/__img-close-btn/popup__img-close-btn.css);
-
-.popup_type_place-image{
-  background: rgba(0, 0, 0, 0.9);
-}
-.popup__container_image {
-width: auto;
-flex-direction: column;
-}
-
-.popup__image {
-  max-height: 75vh;
-  max-width: 75vw;
-}
-
-.popup__image-title {
-  margin-top: 10px;
-  align-self: flex-start;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  color: #FFFFFF;
-}
-
-
-.cards__remove-btn {
-  width: 18px;
-  height: 19px;
-  padding: 0;
-  margin: 0;
-  border: none;
-  background: none;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
-}
-
-.cards__remove-btn:hover {
-opacity: 0.5;
-cursor: pointer;
-}
-
-.cards__vector-korzina {
-  width: 18px;
-  height: 19px;
-}
-
-.cards__like-btn_active {
-  background-image: url(../images/vector-love-active.svg);
-}
-
-.cards__like-btn_active:hover {
-  opacity: 1;
-}
+@import url(../blocks/popup/_type/_place-image/popup_type_place-image.css);
+@import url(../blocks/popup/__container/_image/popup__container_image.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__image-title/popup__image-title.css);
