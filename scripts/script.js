@@ -12,7 +12,7 @@ const profileProfession = document.querySelector('.profile__profession');
 const popupElementAddPlace = document.querySelector('.popup_type_add-place');
 const popupCloseButtonElementAddPlace = popupElementAddPlace.querySelector('.popup__close-btn');
 const popupOpenButtonElementAddPlace = document.querySelector('.profile__add-button');
-const formElementAddPlace = document.querySelector('.popup__form');
+const formElementAddPlace = popupElementAddPlace.querySelector('.popup__form');
 const pictureInput = document.querySelector('.popup__input_type_place-name');
 const linkInput = document.querySelector('.popup__input_type_link');
 
@@ -61,8 +61,6 @@ function formSubmitHandler(evt) {
 // Кнопка отправки формы попап 1
 formElementProfile.addEventListener('submit', formSubmitHandler);
 
-// Добавление новой карточки попап 2
-
 
 
 
@@ -108,23 +106,38 @@ const cardTemplate = document.querySelector('#templateCards').content.querySelec
 
 // Генерация карточки (+ добавить функции для удаления и добавления)
 
+const handleLikeButton = (event) => {
+  event.target.closest('.cards__like-btn').classList.toggle('cards__like-btn_active'); // Добавляет или удаляет класс cards__like-btn_active
+}
+
+const handleDeleteCard = (event) => {
+  event.target.closest('.cards__item').remove(); //Находим карточку, на которую нажали удалить
+}
+
 const generateCard = (dataCard) => {
-  const newCard = cardTemplate.cloneNode(true);
+  const newCard = cardTemplate.cloneNode(true); // Создаем новую переменную, клонируя тег li .cards__item
 
   const name = newCard.querySelector('.cards__title');
-  name.textContent = dataCard.name;
+  name.textContent = dataCard.name; // Присваиваем значение name из массива к новой карточке
 
   const link = newCard.querySelector('.cards__image');
-  link.setAttribute('src', dataCard.link);
+  link.setAttribute('src', dataCard.link); // Присваиваем значение link из массива к новой карточке
 
-  return newCard;
+  const likeButton = newCard.querySelector('.cards__like-btn');
+  likeButton.addEventListener('click', handleLikeButton)
+
+  const DeleteButton = newCard.querySelector('.cards__remove-btn');
+  DeleteButton.addEventListener('click', handleDeleteCard)
+
+  return newCard; //возвращаем карточки
 }
 
 // Обработчики событий
-const handleSubmitAddTodoForm = (event) => {
-  event.preventDefault();
-  //renderCard({ title: input.value })
-  //input.value = '';
+const handleSubmitAddCard = (event) => {
+  event.preventDefault(); //Отменить действие браузера по умолчанию после наступления события
+  renderCard({ name: pictureInput.value, link: linkInput.value }); // вызывает функцию добавление карточки и передает значение из input
+  pictureInput.value = ''; // делает значение формы name пустым
+  linkInput.value = ''; // делает значение формы link пустым
 };
 
 
@@ -140,3 +153,6 @@ const renderCard = (dataCard) => {
 initialCards.forEach((dataCard) => {
   renderCard(dataCard);
 });
+
+// Добавление новой карточки попап 2
+formElementAddPlace.addEventListener('submit', handleSubmitAddCard);
