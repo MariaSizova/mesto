@@ -22,93 +22,53 @@ const popupImageElementImage = popupElementImage.querySelector('.popup__image');
 const popupCloseButtonElementImage = popupElementImage.querySelector('.popup__close-btn');
 const popupTitleElementImage = popupElementImage.querySelector('.popup__image-title');
 
-// Функция открытие попап 1
-const openPopupProfile = () => {
-  popupElementProfile.classList.add('popup_is-opened'); // Добавлет класс для отображения попап
+// Функция для открытия попапа
+const openPopup = (popup) => {
+  popup.classList.add('popup_is-opened');
+}
+
+//Функция для закрытия попапа
+const closePopup = (popup) => {
+  popup.classList.remove('popup_is-opened');
+}
+
+// Кнопка открытия попапа 1
+popupOpenButtonElementProfile.addEventListener('click', function () {
+  openPopup(popupElementProfile);
   nameInput.value = profileTitle.textContent; // Берет значение имени из section:profile
   jobInput.value = profileProfession.textContent; // Берет значение профессии из section:profile
-}
+});
 
-// Функция открытия попап 2
-const openPopupAddPlace = () => {
-  popupElementAddPlace.classList.add('popup_is-opened'); // Добавлет класс для отображения попап
-}
+// Кнопка открытия попапа 2
+popupOpenButtonElementAddPlace.addEventListener('click', function () {
+  openPopup(popupElementAddPlace);
+});
 
-// Функция открытия попап 3
-const openPopupImage = () => {
-  popupElementImage.classList.add('popup_is-opened'); // Добавлет класс для отображения попап
-}
+// Кнопка закрытия попапа 1
+popupCloseButtonElementProfile.addEventListener('click', function () {
+  closePopup(popupElementProfile);
+});
 
-// Функция закрытия попап 1
-const closePopupProfile = () => {
-  popupElementProfile.classList.remove('popup_is-opened'); // Удаляет класс для отображения попап
-}
+// Кнопка закрытия попапа 2
+popupCloseButtonElementAddPlace.addEventListener('click', function () {
+  closePopup(popupElementAddPlace);
+});
 
-// Функция закрытия попап 2
-const closePopupAddPlace = () => {
-  popupElementAddPlace.classList.remove('popup_is-opened'); // Удаляет класс для отображения попап
-}
-
-// Функция закрытия попап 3
-const closePopupImage = () => {
-  popupElementImage.classList.remove('popup_is-opened'); // Удаляет класс для отображения попап
-}
-
-// Кнопка открытия попап 1
-popupOpenButtonElementProfile.addEventListener('click', openPopupProfile); // По клику на кнопку запускает функцию открытия попап 1
-
-// Кнопка открытия попап 2
-popupOpenButtonElementAddPlace.addEventListener('click', openPopupAddPlace); // По клику на кнопку запускает функцию открытия попап 2
-
-// Кнопка закрытия попап 1
-popupCloseButtonElementProfile.addEventListener('click', closePopupProfile); // По клику на кнопку запускает функцию закрытия попап 1
-
-// Кнопка закрытия попап 2
-popupCloseButtonElementAddPlace.addEventListener('click', closePopupAddPlace); // По клику на кнопку запускает функцию закрытия попап 2
-
-// Кнопка закрытия попап 3
-popupCloseButtonElementImage.addEventListener('click', closePopupImage); // По клику на кнопку запускает функцию закрытия попап 3
+// Кнопка закрытия попапа 3
+popupCloseButtonElementImage.addEventListener('click', function () {
+  closePopup(popupElementImage);
+});
 
 //Редактирование имени и информации о себе попап 1
-function formSubmitHandler(evt) {
+function submitEditProfileForm(evt) {
   evt.preventDefault(); // Отменить действие браузера по умолчанию после наступления события
   profileTitle.textContent = nameInput.value; // Применяем к фамилии в профиле значение введенное в форме попап 1
   profileProfession.textContent = jobInput.value; // Применяем к профессии в профиле значение введенное в форме попап 1
-  closePopupProfile(); //Автоматическое закрытие попап 1
+  closePopup(popupElementProfile); //Автоматическое закрытие попап 1
 }
 
 // Кнопка отправки формы попап 1
-formElementProfile.addEventListener('submit', formSubmitHandler);
-
-
-// Массив карточек
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+formElementProfile.addEventListener('submit', submitEditProfileForm);
 
 // Дом узлы
 
@@ -139,17 +99,17 @@ const generateCard = (dataCard) => {
   link.setAttribute('alt', dataCard.name); // Присваиваем значение в alt картинки
 
   const likeButton = newCard.querySelector('.cards__like-btn');
-  likeButton.addEventListener('click', handleLikeButton)
+  likeButton.addEventListener('click', handleLikeButton);
 
-  const DeleteButton = newCard.querySelector('.cards__remove-btn');
-  DeleteButton.addEventListener('click', handleDeleteCard)
+  const buttonDeleteCard = newCard.querySelector('.cards__remove-btn');
+  buttonDeleteCard.addEventListener('click', handleDeleteCard);
 
   const popupOpenButtonImage = newCard.querySelector('.cards__image');
   const handlePopupImage = () => {
     popupImageElementImage.src = dataCard.link;
     popupImageElementImage.alt = dataCard.name;
     popupTitleElementImage.textContent = dataCard.name;
-    openPopupImage();
+    openPopup(popupElementImage);
   }
   popupOpenButtonImage.addEventListener('click', handlePopupImage);
 
@@ -160,9 +120,8 @@ const generateCard = (dataCard) => {
 const handleSubmitAddCard = (event) => {
   event.preventDefault(); //Отменить действие браузера по умолчанию после наступления события
   renderCard({ name: pictureInput.value, link: linkInput.value }); // вызывает функцию добавление карточки и передает значение из input
-  pictureInput.value = ''; // делает значение формы name пустым
-  linkInput.value = ''; // делает значение формы link пустым
-  closePopupAddPlace();
+  formElementAddPlace.reset(); // делает значения формы пустыми
+  closePopup(popupElementAddPlace);
 };
 
 

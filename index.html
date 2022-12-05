@@ -45,9 +45,10 @@
     <div class="popup__container">
       <form class="popup__form">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__input popup__input_type_surname" type="text" name="Имя" value="Жак-Ив Кусто">
+        <input class="popup__input popup__input_type_surname" type="text" name="Имя" value="Жак-Ив Кусто"
+          placeholder="Имя">
         <input class="popup__input popup__input_type_profession" type="text" name="Профессия"
-          value="Исследователь океана">
+          value="Исследователь океана" placeholder="Вид деятельности">
         <button type="submit" class="popup__save-btn">Cохранить</button>
       </form>
       <button type="button" class="popup__close-btn"><img src="./images/close_icon.svg" alt="Крестик"
@@ -74,6 +75,7 @@
           class="popup__img-close-btn"></button>
     </div>
   </div>
+  <script src="./scripts/constants.js" defer></script>
   <script src="./scripts/script.js" defer></script>
   <!--Template для создания карточек-->
   <template id="templateCards">
