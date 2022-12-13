@@ -176,12 +176,12 @@ const checkInputValidity = (input, config) => {
 if(input.validity.valid) {
   //убрать ошибку
   error.textContent = ''
-  error.classList.remove(config.errorClass) //ПОСМОТРЕТЬ!!!
+  error.classList.remove(config.errorClass)
   input.classList.remove(config.inputErrorClass)
 } else {
   //показать ошибку
   error.textContent = input.validationMessage
-  error.classList.add(config.errorClass) //ПОСМОТРЕТЬ!!
+  error.classList.add(config.errorClass)
   input.classList.add(config.inputErrorClass)
 }
 }
