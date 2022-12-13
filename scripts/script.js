@@ -31,9 +31,9 @@ const handleKeyUp = (e) => {
 }
 
 //Закрытие попапа по Overley
-const handleOverley = (e) => {
-  if(!e.target.closest('popup__container')) {
-    closePopup(e.target);
+const handleOverley = (event) => {
+  if(event.target.closest('.popup')) {
+    closePopup(event.target);
   }
 }
 
@@ -42,6 +42,7 @@ const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
 
   document.addEventListener('keyup', handleKeyUp);
+  document.addEventListener('click', handleOverley);
 }
 
 //Функция для закрытия попапа
