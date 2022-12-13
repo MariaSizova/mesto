@@ -43,12 +43,34 @@
   </div>
   <div class="popup popup_type_profile">
     <div class="popup__container">
-      <form class="popup__form">
+      <form class="popup__form" name="new" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__input popup__input_type_surname" type="text" name="Имя" value="Жак-Ив Кусто"
-          placeholder="Имя">
-        <input class="popup__input popup__input_type_profession" type="text" name="Профессия"
-          value="Исследователь океана" placeholder="Вид деятельности">
+        <input
+        id="name"
+        class="popup__input popup__input_type_surname"
+        type="text"
+        name="Имя"
+        value="Жак-Ив Кусто"
+        minlength="2"
+        maxlength="40"
+        required
+        placeholder="Имя">
+
+        <span id="name-error" class="error"></span>
+
+        <input
+        id="professional"
+        class="popup__input popup__input_type_profession"
+        type="text"
+        name="Профессия"
+        value="Исследователь океана"
+        minlength="2"
+        maxlength="200"
+        required
+        placeholder="Вид деятельности">
+
+        <span id="professional-error" class="error"></span>
+
         <button type="submit" class="popup__save-btn">Cохранить</button>
       </form>
       <button type="button" class="popup__close-btn"><img src="./images/close_icon.svg" alt="Крестик"
@@ -57,11 +79,31 @@
   </div>
   <div class="popup popup_type_add-place">
     <div class="popup__container">
-      <form class="popup__form">
+      <form class="popup__form" novalidate>
         <h2 class="popup__title">Новое место</h2>
-        <input class="popup__input popup__input_type_place-name" type="text" name="Название" placeholder="Название">
-        <input class="popup__input popup__input_type_link" type="text" name="Ссылка" placeholder="Ссылка на картинку">
-        <button type="submit" class="popup__save-btn">Cоздать</button>
+        <input
+        id="card"
+        class="popup__input popup__input_type_place-name"
+        type="text"
+        name="Название"
+        minlength="2"
+        maxlength="30"
+        required
+        placeholder="Название">
+
+        <span id="card-error" class="error"></span>
+
+        <input
+        id="link"
+        class="popup__input popup__input_type_link"
+        type="url"
+        name="Ссылка"
+        required
+        placeholder="Ссылка на картинку">
+
+        <span id="link-error" class="error"></span>
+
+        <button type="submit" class="popup__save-btn popup__button_invalid">Cоздать</button>
       </form>
       <button type="button" class="popup__close-btn"><img src="./images/close_icon.svg" alt="Крестик"
           class="popup__img-close-btn"></button>
