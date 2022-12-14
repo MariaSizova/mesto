@@ -15,6 +15,7 @@ const popupOpenButtonElementAddPlace = document.querySelector('.profile__add-but
 const formElementAddPlace = popupElementAddPlace.querySelector('.popup__form');
 const pictureInput = document.querySelector('.popup__input_type_place-name');
 const linkInput = document.querySelector('.popup__input_type_link');
+const button = document.querySelector('.popup__button_invalid');
 
 //DOM узел попап 3
 const popupElementImage = document.querySelector('.popup_type_place-image');
@@ -37,6 +38,12 @@ const handleOverleyClick = (event) => {
   }
 }
 
+//Функция для попапа 2 - неактивная кнопка
+function disableSubmitButton(button) {
+  button.classList.add('popup__button_invalid');
+  button.disabled = true;
+}
+
 // Функция для открытия попапа
 const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
@@ -48,7 +55,6 @@ const openPopup = (popup) => {
 //Функция для закрытия попапа
 const closePopup = (popup) => {
   popup.classList.remove('popup_is-opened');
-
   document.removeEventListener('keyup', handleKeyUp);
   document.removeEventListener('click', handleOverleyClick);
 }
@@ -63,6 +69,7 @@ popupOpenButtonElementProfile.addEventListener('click', function () {
 // Кнопка открытия попапа 2
 popupOpenButtonElementAddPlace.addEventListener('click', function () {
   openPopup(popupElementAddPlace);
+  disableSubmitButton(button);
 });
 
 // Кнопка закрытия попапа 1
@@ -144,13 +151,11 @@ const handleSubmitAddCard = () => {
 };
 
 //Добавление карточки
-
 const renderCard = (dataCard) => {
   cardContainer.prepend(generateCard(dataCard));
 };
 
 //Рендер карточек
-
 initialCards.forEach((dataCard) => {
   renderCard(dataCard);
 });
