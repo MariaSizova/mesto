@@ -25,13 +25,13 @@ const popupTitleElementImage = popupElementImage.querySelector('.popup__image-ti
 //Закрытие попапа по Ecs
 const handleKeyUp = (e) => {
   if(e.key === 'Escape') {
-    const openPopup = document.querySelector('.popup_is-opened');
-    closePopup(openPopup);
-}
+    const openedPopup = document.querySelector('.popup_is-opened');
+    closePopup(openedPopup);
+  }
 }
 
 //Закрытие попапа по Overley
-const handleOverley = (event) => {
+const handleOverleyClick = (event) => {
   if(event.target.closest('.popup')) {
     closePopup(event.target);
   }
@@ -42,7 +42,7 @@ const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
 
   document.addEventListener('keyup', handleKeyUp);
-  document.addEventListener('click', handleOverley);
+  document.addEventListener('click', handleOverleyClick);
 }
 
 //Функция для закрытия попапа
@@ -50,7 +50,7 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_is-opened');
 
   document.removeEventListener('keyup', handleKeyUp);
-  document.removeEventListener('click', handleOverley);
+  document.removeEventListener('click', handleOverleyClick);
 }
 
 // Кнопка открытия попапа 1
@@ -81,15 +81,14 @@ popupCloseButtonElementImage.addEventListener('click', function () {
 });
 
 //Редактирование имени и информации о себе попап 1
-function submitEditProfileForm(evt) {
-  evt.preventDefault(); // Отменить действие браузера по умолчанию после наступления события
+function handleProfileFormSubmit() {
   profileTitle.textContent = nameInput.value; // Применяем к фамилии в профиле значение введенное в форме попап 1
   profileProfession.textContent = jobInput.value; // Применяем к профессии в профиле значение введенное в форме попап 1
   closePopup(popupElementProfile); //Автоматическое закрытие попап 1
 }
 
 // Кнопка отправки формы попап 1
-formElementProfile.addEventListener('submit', submitEditProfileForm);
+formElementProfile.addEventListener('submit', handleProfileFormSubmit);
 
 // Дом узлы
 
@@ -115,9 +114,9 @@ const generateCard = (dataCard) => {
   const name = newCard.querySelector('.cards__title');
   name.textContent = dataCard.name; // Присваиваем значение name из массива к новой карточке
 
-  const link = newCard.querySelector('.cards__image');
-  link.setAttribute('src', dataCard.link); // Присваиваем значение link из массива к новой карточке
-  link.setAttribute('alt', dataCard.name); // Присваиваем значение в alt картинки
+  const image = newCard.querySelector('.cards__image');
+  image.setAttribute('src', dataCard.link); // Присваиваем значение link из массива к новой карточке
+  image.setAttribute('alt', dataCard.name); // Присваиваем значение в alt картинки
 
   const likeButton = newCard.querySelector('.cards__like-btn');
   likeButton.addEventListener('click', handleLikeButton);
@@ -138,20 +137,17 @@ const generateCard = (dataCard) => {
 }
 
 // Обработчики событий
-const handleSubmitAddCard = (event) => {
-  event.preventDefault(); //Отменить действие браузера по умолчанию после наступления события
+const handleSubmitAddCard = () => {
   renderCard({ name: pictureInput.value, link: linkInput.value }); // вызывает функцию добавление карточки и передает значение из input
   formElementAddPlace.reset(); // делает значения формы пустыми
   closePopup(popupElementAddPlace);
 };
-
 
 //Добавление карточки
 
 const renderCard = (dataCard) => {
   cardContainer.prepend(generateCard(dataCard));
 };
-
 
 //Рендер карточек
 
@@ -161,76 +157,3 @@ initialCards.forEach((dataCard) => {
 
 // Добавление новой карточки попап 2
 formElementAddPlace.addEventListener('submit', handleSubmitAddCard);
-
-
-//ВАЛИДАЦИЯ
-//2. Валидация на input серез браузерные св-ва
-//ДOM узлы
-const forms = [...document.querySelectorAll('.popup__form')];
-const inputs = [...document.querySelectorAll('.popup__input')];
-
-//Создаем функцию проверки инпута
-const checkInputValidity = (input, config) => {
-  const error = document.querySelector(`#${input.id}-error`)
-
-if(input.validity.valid) {
-  //убрать ошибку
-  error.textContent = ''
-  error.classList.remove(config.errorClass)
-  input.classList.remove(config.inputErrorClass)
-} else {
-  //показать ошибку
-  error.textContent = input.validationMessage
-  error.classList.add(config.errorClass)
-  input.classList.add(config.inputErrorClass)
-}
-}
-
-//Создаем функцию задизейблить или раздизейблить кнопку
-const toogleButton = (inputs, button, config) => {
-  const isFormValid = inputs.every(input => input.validity.valid)
-
-  if(isFormValid) {
-    //раздизейбить кнопку
-    button.classList.remove(config.inactiveButtonClass)
-    button.disabled = ''
-  } else {
-    //задизейбить кнопку
-    button.classList.add(config.inactiveButtonClass)
-    button.disabled = 'disabled'
-  }
-}
-
-// Создаем функцию enableValidation
-
-const enableValidation = (config) => {
-//Вынимаем из config св-ва, которые нам понадобятся
-  const { formSelector, inputSelector, submitButtonSelector, ...restConfig } = config
-
-  const forms = [...document.querySelectorAll(formSelector)];
-
-  forms.forEach(form => {
-    const inputs = [...form.querySelectorAll(inputSelector)];
-    const button = form.querySelector(submitButtonSelector);
-
-    form.addEventListener('sibmit', (e) => {
-      e.preventDefault()
-    })
-
-    inputs.forEach(input => {
-      input.addEventListener('input', () => {
-        checkInputValidity(input, restConfig) //вызываем функцию валидности инпута
-        toogleButton(inputs, button, restConfig) //вызываем функцию задизайбить или раздизейбить кнопку
-      })
-    })
-  })
-}
-
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-btn',
-  inactiveButtonClass: 'popup__button_invalid',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-})
