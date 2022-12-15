@@ -1,23 +1,19 @@
 //ВАЛИДАЦИЯ
 //2. Валидация на input серез браузерные св-ва
-//ДOM узлы
-const forms = [...document.querySelectorAll('.popup__form')];
-const inputs = [...document.querySelectorAll('.popup__input')];
-
 //Создаем функцию проверки инпута
 const checkInputValidity = (input, config) => {
   const error = document.querySelector(`#${input.id}-error`);
 
   if(input.validity.valid) {
   //убрать ошибку
-  error.textContent = '';
-  error.classList.remove(config.errorClass);
-  input.classList.remove(config.inputErrorClass);
+    error.textContent = '';
+    error.classList.remove(config.errorClass);
+    input.classList.remove(config.inputErrorClass);
   } else {
   //показать ошибку
-  error.textContent = input.validationMessage;
-  error.classList.add(config.errorClass);
-  input.classList.add(config.inputErrorClass);
+    error.textContent = input.validationMessage;
+    error.classList.add(config.errorClass);
+    input.classList.add(config.inputErrorClass);
   }
 }
 
