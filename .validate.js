@@ -1,3 +1,4 @@
+/*
 //ВАЛИДАЦИЯ
 //2. Валидация на input серез браузерные св-ва
 //Создаем функцию проверки инпута
@@ -65,3 +66,4 @@ enableValidation({
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 })
+*/

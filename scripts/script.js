@@ -1,3 +1,11 @@
+//Импорт массива
+import { initialCards } from './constants.js';
+import { config } from './config.js';
+
+//Импорт классов
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
 // DOM узел попап 1
 const popupElementProfile = document.querySelector('.popup_type_profile');
 const popupCloseButtonElementProfile = popupElementProfile.querySelector('.popup__close-btn');
@@ -23,26 +31,8 @@ const popupImageElementImage = popupElementImage.querySelector('.popup__image');
 const popupCloseButtonElementImage = popupElementImage.querySelector('.popup__close-btn');
 const popupTitleElementImage = popupElementImage.querySelector('.popup__image-title');
 
-//Закрытие попапа по Ecs
-const handleKeyUp = (e) => {
-  if(e.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_is-opened');
-    closePopup(openedPopup);
-  }
-}
-
-//Закрытие попапа по Overley
-const handleOverleyClick = (event) => {
-  if(event.target.closest('.popup')) {
-    closePopup(event.target);
-  }
-}
-
-//Функция для попапа 2 - неактивная кнопка
-function disableSubmitButton() {
-  cardFormSubmitButton.classList.add('popup__button_invalid');
-  cardFormSubmitButton.disabled = true;
-}
+//DOM узел контейнера для карточек
+const cardContainer = document.querySelector(".cards");
 
 // Функция для открытия попапа
 const openPopup = (popup) => {
@@ -57,6 +47,27 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_is-opened');
   document.removeEventListener('keyup', handleKeyUp);
   document.removeEventListener('click', handleOverleyClick);
+}
+
+//Функция для закрытия по Ecs
+const handleKeyUp = (e) => {
+  if(e.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_is-opened');
+    closePopup(openedPopup);
+  }
+}
+
+//Функция для закрытия по Overley
+const handleOverleyClick = (event) => {
+  if(event.target.closest('.popup')) {
+    closePopup(event.target);
+  }
+}
+
+//Функция для попапа 2 - неактивная кнопка
+function disableSubmitButton() {
+  cardFormSubmitButton.classList.add('popup__button_invalid');
+  cardFormSubmitButton.disabled = true;
 }
 
 // Кнопка открытия попапа 1
@@ -88,7 +99,8 @@ popupCloseButtonElementImage.addEventListener('click', function () {
 });
 
 //Редактирование имени и информации о себе попап 1
-function handleProfileFormSubmit() {
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
   profileTitle.textContent = nameInput.value; // Применяем к фамилии в профиле значение введенное в форме попап 1
   profileProfession.textContent = jobInput.value; // Применяем к профессии в профиле значение введенное в форме попап 1
   closePopup(popupElementProfile); //Автоматическое закрытие попап 1
@@ -97,68 +109,51 @@ function handleProfileFormSubmit() {
 // Кнопка отправки формы попап 1
 formElementProfile.addEventListener('submit', handleProfileFormSubmit);
 
-// Дом узлы
+// Загрузка и генерация стандартных карточек страницы
+initialCards.forEach((data) => {
+  const card = new Card(data, '#templateCards', handleCardClick);
+  const cardElement = card.generateCard();
 
-const cardContainer = document.querySelector(".cards");
+  cardContainer.prepend(cardElement);
+});
 
-// Шаблоны
+//Создадим функцию для открытия новой карточки
+const renderCard = (data, item) => {
+  const card = new Card(data, '#templateCards', handleCardClick);
+  const cardElement = card.generateCard();
 
-const cardTemplate = document.querySelector('#templateCards').content.querySelector('.cards__item');
+  item.prepend(cardElement);
+};
 
-// Генерация карточки (+ добавить функции для удаления и добавления)
-
-const handleLikeButton = (event) => {
-  event.target.closest('.cards__like-btn').classList.toggle('cards__like-btn_active'); // Добавляет или удаляет класс cards__like-btn_active
+//Функция открытия попапа 3(используется в файле card.js)
+function handleCardClick(title, image) {
+  popupImageElementImage.src = image;
+  popupImageElementImage.alt = title;
+  popupTitleElementImage.textContent = title;
+  openPopup(popupElementImage);
 }
 
-const handleDeleteCard = (event) => {
-  event.target.closest('.cards__item').remove(); //Находим карточку, на которую нажали удалить
-}
+//Запускаем валидацию на форму из попапа профиля (используются данные из файла FormValidator.js)
+const popupProfileFormValidator = new FormValidator(config, popupElementProfile);
+popupProfileFormValidator.enableValidation();
 
-const generateCard = (dataCard) => {
-  const newCard = cardTemplate.cloneNode(true); // Создаем новую переменную, клонируя тег li .cards__item
+//Запускаем валидацию на форму из попапа добавления карточки
+const popupCardFormValidator = new FormValidator(config, popupElementAddPlace);
+popupCardFormValidator.enableValidation();
 
-  const name = newCard.querySelector('.cards__title');
-  name.textContent = dataCard.name; // Присваиваем значение name из массива к новой карточке
+// Обработчики событий для добавления карточки
 
-  const image = newCard.querySelector('.cards__image');
-  image.setAttribute('src', dataCard.link); // Присваиваем значение link из массива к новой карточке
-  image.setAttribute('alt', dataCard.name); // Присваиваем значение в alt картинки
-
-  const likeButton = newCard.querySelector('.cards__like-btn');
-  likeButton.addEventListener('click', handleLikeButton);
-
-  const buttonDeleteCard = newCard.querySelector('.cards__remove-btn');
-  buttonDeleteCard.addEventListener('click', handleDeleteCard);
-
-  const popupOpenButtonImage = newCard.querySelector('.cards__image');
-  const handlePopupImage = () => {
-    popupImageElementImage.src = dataCard.link;
-    popupImageElementImage.alt = dataCard.name;
-    popupTitleElementImage.textContent = dataCard.name;
-    openPopup(popupElementImage);
+const handleSubmitAddCard = (e) => {
+  e.preventDefault();
+  const elementCard = {
+    title: pictureInput.value,
+    image: linkInput.value
   }
-  popupOpenButtonImage.addEventListener('click', handlePopupImage);
-
-  return newCard; //возвращаем карточки
-}
-
-// Обработчики событий
-const handleSubmitAddCard = () => {
-  renderCard({ name: pictureInput.value, link: linkInput.value }); // вызывает функцию добавление карточки и передает значение из input
+  renderCard(elementCard, cardContainer)
   formElementAddPlace.reset(); // делает значения формы пустыми
   closePopup(popupElementAddPlace);
 };
 
-//Добавление карточки
-const renderCard = (dataCard) => {
-  cardContainer.prepend(generateCard(dataCard));
-};
-
-//Рендер карточек
-initialCards.forEach((dataCard) => {
-  renderCard(dataCard);
-});
-
-// Добавление новой карточки попап 2
+//Добавление новой карточки попап 2
 formElementAddPlace.addEventListener('submit', handleSubmitAddCard);
+
