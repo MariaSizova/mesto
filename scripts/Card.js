@@ -22,14 +22,16 @@ export class Card {
     this._element = this._getTemplate();
     //this._popupElementImage = this._element.querySelector('.popup_type_place-image');
     this._setEventListeners(); // добавим обработчики
-    /*this._setImageEventListeners();*/ // добавим обработчики
+    this._elementChangeData();
 
-    // Найдем переменные, у которых потом будем менять данные
-    this._element.querySelector('.cards__image').src = this._image;
-    this._element.querySelector('.cards__title').textContent = this._title;
-    this._element.querySelector('.cards__image').alt = this._title;;
     // Вернём элемент наружу
     return this._element;
+  }
+
+  _elementChangeData() {
+    this._element.querySelector('.cards__image').src = this._image;
+    this._element.querySelector('.cards__title').textContent = this._title;
+    this._element.querySelector('.cards__image').alt = this._title;
   }
 
 //Обработчики событий

@@ -64,12 +64,6 @@ const handleOverleyClick = (event) => {
   }
 }
 
-//Функция для попапа 2 - неактивная кнопка
-function disableSubmitButton() {
-  cardFormSubmitButton.classList.add('popup__button_invalid');
-  cardFormSubmitButton.disabled = true;
-}
-
 // Кнопка открытия попапа 1
 popupOpenButtonElementProfile.addEventListener('click', function () {
   openPopup(popupElementProfile);
@@ -117,12 +111,15 @@ initialCards.forEach((data) => {
   cardContainer.prepend(cardElement);
 });
 
+function createCard(data) {
+  const card = new Card(data, '#templateCards', handleCardClick);
+  return card.generateCard();
+}
+
 //Создадим функцию для открытия новой карточки
 const renderCard = (data, item) => {
-  const card = new Card(data, '#templateCards', handleCardClick);
-  const cardElement = card.generateCard();
-
-  item.prepend(cardElement);
+  createCard(data);
+  item.prepend(createCard(data));
 };
 
 //Функция открытия попапа 3(используется в файле card.js)
