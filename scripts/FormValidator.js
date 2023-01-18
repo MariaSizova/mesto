@@ -74,4 +74,10 @@ export class FormValidator {
           buttonElement.disabled = false;
       }
   };
+
+  // Функция диактивации кнопки для попап 2
+  disableSubmitButton() {
+    this._submitButton.classList.add(this._inactiveButtonClass);
+    this._submitButton.disabled = true;
+  }
 };

@@ -74,7 +74,7 @@ popupOpenButtonElementProfile.addEventListener('click', function () {
 // Кнопка открытия попапа 2
 popupOpenButtonElementAddPlace.addEventListener('click', function () {
   openPopup(popupElementAddPlace);
-  disableSubmitButton(cardFormSubmitButton);
+  popupCardFormValidator.disableSubmitButton();
 });
 
 // Кнопка закрытия попапа 1
@@ -85,6 +85,7 @@ popupCloseButtonElementProfile.addEventListener('click', function () {
 // Кнопка закрытия попапа 2
 popupCloseButtonElementAddPlace.addEventListener('click', function () {
   closePopup(popupElementAddPlace);
+  formElementAddPlace.reset();
 });
 
 // Кнопка закрытия попапа 3
@@ -105,10 +106,9 @@ formElementProfile.addEventListener('submit', handleProfileFormSubmit);
 
 // Загрузка и генерация стандартных карточек страницы
 initialCards.forEach((data) => {
-  const card = new Card(data, '#templateCards', handleCardClick);
-  const cardElement = card.generateCard();
+  createCard(data);
 
-  cardContainer.prepend(cardElement);
+  cardContainer.prepend(createCard(data));
 });
 
 function createCard(data) {
