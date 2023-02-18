@@ -59,7 +59,7 @@
 
         <input
         id="professional"
-        name="job"
+        name="about"
         class="popup__input popup__input_type_profession"
         type="text"
         value="Исследователь океана"
@@ -112,6 +112,43 @@
     <div class="popup__container popup__container_image">
       <img src="#" alt="" class="popup__image">
       <h2 class="popup__image-title"></h2>
+      <button type="button" class="popup__close-btn"><img src="<%=require('./images/close_icon.svg')%>" alt="Крестик"
+          class="popup__img-close-btn"></button>
+    </div>
+  </div>
+  <div class="popup popup_type_delete-card">
+    <div class="popup__container">
+      <form class="popup__form" name="delete-card-popupform" novalidate>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button type="submit" class="popup__save-btn">Да</button>
+        </form>
+    </div>
+  </div>
+  <div class="popup popup_type_view-avatar">
+    <div class="popup__container popup__container_image">
+      <img src="#" alt="" class="popup__image">
+      <h2 class="popup__image-title"></h2>
+      <button type="button" class="popup__close-btn"><img src="<%=require('./images/close_icon.svg')%>" alt="Крестик"
+          class="popup__img-close-btn"></button>
+    </div>
+  </div>
+  <div class="popup popup_type_new-avatar">
+    <div class="popup__container">
+      <form class="popup__form" name="new-avatar-popupform" novalidate>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <input
+        id="image-url"
+        class="popup__input"
+        type="url"
+        name="url"
+        autocomplete="off"
+        required
+        placeholder="Ссылка на картинку">
+
+        <span id="card-error" class="error"></span>
+
+        <button type="submit" class="popup__save-btn popup__button">Сохранить</button>
+      </form>
       <button type="button" class="popup__close-btn"><img src="<%=require('./images/close_icon.svg')%>" alt="Крестик"
           class="popup__img-close-btn"></button>
     </div>

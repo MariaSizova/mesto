@@ -27,3 +27,6 @@ const popupTitleElementImage = popupElementImage.querySelector('.popup__image-ti
 
 //DOM узел контейнера для карточек
 const cardContainer = document.querySelector(".cards");
+
+//Аватар
+export const profileImageElement = document.querySelector('.profile__avatar');

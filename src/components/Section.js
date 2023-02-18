@@ -6,15 +6,15 @@ export class Section {
 
 //Метод, который отвечает за отрисовку всех элементов
 
-renderItems(data) {
-  data.forEach(item => {
-    this._renderer(item); // вызываем renderer, передав item
+renderItems(items) {
+  items.reverse().forEach(item => {
+    this.addItem(item);
   });
   }
 
 // Метод, который принимает DOM-элемент и добавляет его в контейнер
 
-  addItem(element) {
-    this._container.prepend(element);
-  }
+addItem(item) {
+  this._container.prepend(this._renderer(item)); // вызываем _renderer, передав item
+};
 }

@@ -64,14 +64,16 @@ export class FormValidator {
   // Функция принимает массив полей ввода и элемент кнопки, состояние которой нужно менять
   _toggleButtonState(inputList, buttonElement) {
       // Если есть хотя бы один невалидный инпут
-      if (this._hasInvalidInput(inputList)) {
+      if (this._hasInvalidInput(this._inputList)) {
           // сделай кнопку неактивной
           buttonElement.classList.add(this._inactiveButtonClass);
           buttonElement.disabled = true;
+          this.disableSubmitButton(this._submitButton);
       } else {
           // иначе сделай кнопку активной
           buttonElement.classList.remove(this._inactiveButtonClass);
           buttonElement.disabled = false;
+          //this.enableSubmitButton(this._submitButton);
       }
   };
 

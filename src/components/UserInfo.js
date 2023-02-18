@@ -1,7 +1,8 @@
 export class UserInfo {
-  constructor({nameSelector, infoSelector}) {
+  constructor({nameSelector, infoSelector, avatarSelector}) {
       this._nameElement = document.querySelector(nameSelector);
       this._infoElement = document.querySelector(infoSelector);
+      this._avatarElement = document.querySelector(avatarSelector);
   }
 
 //Метод, который возвращает объект с данными пользователя.
@@ -18,8 +19,15 @@ export class UserInfo {
 
 //Метод, который принимает новые данные пользователя и добавляет их на страницу.
 
-  setUserInfo({ name, job }) {
+  setUserInfo({ name, about, avatar, _id }) {
       this._nameElement.textContent = name;
-      this._infoElement.textContent = job;
+      this._infoElement.textContent = about;
+      this._avatarElement.src = avatar;
+      this._id = _id;
   }
+
+  getId() {
+    return this._id;
+}
+
 }
