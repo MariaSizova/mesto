@@ -40,7 +40,7 @@ export class FormValidator {
       this._inputList.forEach(input => {
           input.addEventListener('input', () => {
               this._checkInputValidity(input);
-              this._toggleButtonState(this._inputList, this._submitButton);
+              this._toggleButtonState();
           });
       });
   };
@@ -62,18 +62,18 @@ export class FormValidator {
 
   //Активируем кнопки: раздизэйблить и задизэйблить
   // Функция принимает массив полей ввода и элемент кнопки, состояние которой нужно менять
-  _toggleButtonState(inputList, buttonElement) {
+  _toggleButtonState() {
       // Если есть хотя бы один невалидный инпут
       if (this._hasInvalidInput(this._inputList)) {
           // сделай кнопку неактивной
-          //buttonElement.classList.add(this._inactiveButtonClass);
-          buttonElement.disabled = true;
+          this._submitButton.classList.add(this._inactiveButtonClass);
+          this._submitButton.disabled = true;
           this.disableSubmitButton(this._submitButton);
       } else {
           // иначе сделай кнопку активной
-          buttonElement.classList.remove(this._inactiveButtonClass);
-          buttonElement.disabled = false;
-          //this.enableSubmitButton(this._submitButton);
+          this._submitButton.classList.remove(this._inactiveButtonClass);
+          this._submitButton.disabled = false;
+          this.enableSubmitButton(this._submitButton);
       }
   };
 
@@ -81,5 +81,8 @@ export class FormValidator {
   disableSubmitButton() {
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.disabled = true;
+    //buttonElement.classList.add(this._inactiveButtonClass);
+    //buttonElement.disabled = true;
   }
+//}
 };

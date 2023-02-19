@@ -106,10 +106,6 @@ popupCard.setEventListeners();
 const popupImage = new PopupWithImage('.popup_type_image');
 popupImage.setEventListeners();
 
-//Попап просмотра аватара
-const popupViewAvatar = new PopupWithImage('.popup_type_view-avatar');
-popupViewAvatar.setEventListeners();
-
   //Функция открытия попапа 3
 function handleCardClick(name, link) {
   popupImage.open(name, link);
@@ -223,10 +219,12 @@ popupOpenButtonElementAddPlace.addEventListener('click', function () {
 
 profileImageElement.addEventListener('click', function () {
   popupNewAvatar.open();
-  popupCardFormValidator.enableValidation();
 });
 
 //Запускаем валидацию на форму из попапа добавления карточки
-const popupCardFormValidator = new FormValidator(config, popupElementAddPlace, popupElementAvatar);
+const popupCardFormValidator = new FormValidator(config, popupElementAddPlace);
 popupCardFormValidator.enableValidation();
 
+const popupAvatarValidation = new FormValidator (config, popupElementAvatar);
+popupAvatarValidation.disableSubmitButton();
+popupAvatarValidation.enableValidation();
