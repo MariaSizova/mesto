@@ -9,11 +9,10 @@ export class PopupWithImage extends Popup {
 
 // При открытии отображается картинка и подпись
 
-    open(title, image) {
-        this._popupImageElementImage.src = image;
-        this._popupImageElementImage.alt = title;
-        this._popupTitleElementImage.textContent = title;
+    open(name, link) {
+        this._popupImageElementImage.src = link;
+        this._popupImageElementImage.alt = name;
+        this._popupTitleElementImage.textContent = name;
         super.open();
     }
 }
-

@@ -12,6 +12,7 @@ const profileProfession = document.querySelector('.profile__profession');
 
 // DOM узел попап 2
 export const popupElementAddPlace = document.querySelector('.popup_type_add-place');
+export const popupElementAvatar = document.querySelector('.popup_type_new-avatar');
 const popupCloseButtonElementAddPlace = popupElementAddPlace.querySelector('.popup__close-btn');
 export const popupOpenButtonElementAddPlace = document.querySelector('.profile__add-button');
 const formElementAddPlace = popupElementAddPlace.querySelector('.popup__form');

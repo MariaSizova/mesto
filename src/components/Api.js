@@ -45,8 +45,8 @@ export class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        title: formValues.place,
-        image: formValues.url
+        name: formValues.place,
+        link: formValues.url
       })
     })
   }

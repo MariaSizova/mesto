@@ -1,7 +1,7 @@
 export class Card {
   constructor(data, templateSelector, handleCardClick, handleDeleteClick, handleLikeClick, userID) {
-    this._text = data.title;
-    this._link = data.image;
+    this._text = data.name;
+    this._link = data.link;
     this._ownerId = data.owner._id;
     this._id = data._id;
     this._likes = data.likes;
@@ -16,7 +16,7 @@ export class Card {
     const cardElement = document
     .querySelector(this._templateSelector)
     .content
-    .querySelector('.cards__item')
+    .querySelector('.element')
     .cloneNode(true);
 
     return cardElement;
@@ -26,10 +26,14 @@ export class Card {
     this._element = this._getTemplate();
     // Запишем изображение из темлейта (шаблона) в переменную, т. к.
     // к нему нужно будет обращаться дважды (задавая атрибуты src и alt).
-    this._elementImg = this._element.querySelector('.cards__image');
-    this._likeButton = this._element.querySelector('.cards__like-btn');
-    this._countOfLikes = this._element.querySelector('.element__count-likes'); //Разобраться
-    this._deleteButton = this._element.querySelector('.cards__remove-btn');
+    //this._elementImg = this._element.querySelector('.cards__image');
+    //this._likeButton = this._element.querySelector('.cards__like-btn');
+    //this._countOfLikes = this._element.querySelector('.element__count-likes');
+    //this._deleteButton = this._element.querySelector('.cards__remove-btn');
+    this._elementImg = this._element.querySelector('.element__image');
+    this._likeButton = this._element.querySelector('.element__like-button');
+    this._countOfLikes = this._element.querySelector('.element__count-likes');
+    this._deleteButton = this._element.querySelector('.element__delete-button');
 
     this._setEventListeners();
     this._handleRemoveDeleteButton();
@@ -39,7 +43,8 @@ export class Card {
     //Добавляем данные к карточкам
     this._elementImg.src = this._link;
     this._elementImg.alt = this._text;
-    this._element.querySelector('.cards__title').textContent = this._text;
+    this._element.querySelector('.element__title').textContent = this._text;
+
 
     return this._element;
   }
@@ -68,7 +73,7 @@ export class Card {
   //}
 
   handleLikeButtonClick = () => {
-    this._likeButton.classList.toggle('element__like-button_active');//Разобраться
+    this._likeButton.classList.toggle('element__like-button_active');
   }
 
   handleDeleteButtonClick = () => {
@@ -78,7 +83,7 @@ export class Card {
 
   _handleRemoveDeleteButton() {
     if (this._ownerId != this._userID) {
-      this._deleteButton.classList.add('element__delete-button_hide');//Разобраться
+      this._deleteButton.classList.add('element__delete-button_hide');
     }
   }
   _showCountofLikes() {

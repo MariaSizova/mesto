@@ -17,7 +17,7 @@ import { Api } from '../components/Api.js';
 
 
 //Импорт DOM узлов
-import { popupElementProfile, popupOpenButtonElementProfile, formElementProfile, nameInput, jobInput, popupElementAddPlace, popupOpenButtonElementAddPlace, popupElementImage, profileImageElement} from '../scripts/components.js';
+import { popupElementProfile, popupOpenButtonElementProfile, formElementProfile, nameInput, jobInput, popupElementAddPlace, popupElementAvatar, popupOpenButtonElementAddPlace, popupElementImage, profileImageElement} from '../scripts/components.js';
 
 //Api
 // Создаём экземпляр класса Api
@@ -103,7 +103,7 @@ popupCard.setEventListeners();
 
 //PopupWithImage
 // Попап 3 (открытие картинок с текстом)
-const popupImage = new PopupWithImage('.popup_type_place-image');
+const popupImage = new PopupWithImage('.popup_type_image');
 popupImage.setEventListeners();
 
 //Попап просмотра аватара
@@ -111,10 +111,9 @@ const popupViewAvatar = new PopupWithImage('.popup_type_view-avatar');
 popupViewAvatar.setEventListeners();
 
   //Функция открытия попапа 3
-function handleCardClick(title, image) {
-  popupImage.open(title, image);
+function handleCardClick(name, link) {
+  popupImage.open(name, link);
   };
-
 
 //PopupWithConfirmation для попапа удаления карточки
 // Создаём функцию сабмита попапа для удаления карточки
@@ -185,7 +184,7 @@ const handleLikeClick = (cardId, card) => {
 
 const cardList = new Section({
   renderer: (item) => {
-    const card = new Card(item, '#templateCards', handleCardClick, handleDeleteClick, handleLikeClick, userInfo.getId());
+    const card = new Card(item, '#element-template', handleCardClick, handleDeleteClick, handleLikeClick, userInfo.getId());
     const cardElement = card.generateCard();
     return cardElement;
   }
@@ -207,23 +206,27 @@ popupProfileFormValidator.enableValidation();
 //Слушатели
 //Открытие попапа 1 (имя и профессия)
 popupOpenButtonElementProfile.addEventListener('click', function () {
-  popupProfile.setInputValues(userInfo.getUserInfo());
-  formValidators['profile-popupform'].resetValidation()
+  //popupProfile.setInputValues(userInfo.getUserInfo());// не получается так почему-то
   popupProfile.open();
+  const {name, about} = userInfo.getUserInfo();
+  nameInput.value = name;
+  jobInput.value = about;
 });
 
 //Открытие попапа 2(добавление карточек)
 popupOpenButtonElementAddPlace.addEventListener('click', function () {
   popupCard.open();
-  popupCardFormValidator.disableSubmitButton(); //тут по-другому
+  popupCardFormValidator.disableSubmitButton();
 });
 
 //Попап обновления аватара
+
 profileImageElement.addEventListener('click', function () {
-  formValidators['new-avatar-popupform'].resetValidation()
   popupNewAvatar.open();
+  popupCardFormValidator.enableValidation();
 });
 
 //Запускаем валидацию на форму из попапа добавления карточки
-const popupCardFormValidator = new FormValidator(config, popupElementAddPlace);
+const popupCardFormValidator = new FormValidator(config, popupElementAddPlace, popupElementAvatar);
 popupCardFormValidator.enableValidation();
+
